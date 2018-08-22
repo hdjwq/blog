@@ -1,0 +1,6 @@
+#打包
+bin
+#pkg
+pkg
+#webstorm
+.idea
