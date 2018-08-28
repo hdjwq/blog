@@ -9,36 +9,46 @@ func Login(c *gin.Context)  {
 	 result:=&modal.ResultData{}
      account:=&modal.Account{}
      err:=c.ShouldBind(account)
+	 defer setResult(c,result)
 	 if err!=nil {
         result.Code=500;
         result.Data=err;
-	 }else {
-		 logic.Login(account,result)
+        return
 	 }
-     c.Set("result",result)
+	 logic.Login(account,result)
+	 return
 }
 func Register(c *gin.Context)  {
 	result:=&modal.ResultData{}
 	account:=&modal.Account{}
 	err:=c.ShouldBind(account)
+	defer setResult(c,result)
 	if err!=nil {
 		result.Code=500;
 		result.Data=err;
-	}else {
-		logic.Register(account,result)
+		return
 	}
-	c.Set("result",result)
+	logic.Register(account,result)
+	return
 }
 
 func UpdateInfo(c *gin.Context)  {
 	 result:=&modal.ResultData{}
      userInfo:=&modal.UpdateUserInfo{}
      err:=c.ShouldBind(userInfo);
+	 defer setResult(c,result)
 	 if err!=nil {
-		 result.Code=500;
-		 result.Data=err;
-	 }else {
-         logic.UpdateInfo(userInfo,result)
+		result.Code=500;
+		result.Data=err;
+		return
 	 }
-	c.Set("result",result)
+	userId,_:=c.Get("userId");
+    userNum,err:=getUserId(userId);
+	if err!=nil {
+		result.Code=500;
+		return
+	}
+	userInfo.UserId=userNum;
+	logic.UpdateInfo(userInfo,result)
+	return
 }

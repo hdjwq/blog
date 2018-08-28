@@ -13,7 +13,7 @@ type UserInfo struct {
 	Token string `json:"token"`
 }
 type UpdateUserInfo struct {
-	UserId int64 `db:"id" binding:"required" form:"userId" json:"userId"`
+	UserId int64 `db:"id" json:"userId"`
 	Username string `db:"username" binding:"required" form:"userName" json:"userName"`
 	Sex string `db:"sex" binding:"required,number" form:"sex" json:"sex"`
 	Introduce string `db:"introduce" form:"introduce" json:"introduce"`

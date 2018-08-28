@@ -44,7 +44,7 @@ func ResultMiddleware()  gin.HandlerFunc{
 				 	c.JSON(200,gin.H{
 				 		"code":200,
 				 		 "data":resultObj.Data,
-				 		 "msg":nil,
+				 		 "msg":"操作成功!",
 					})
 				 case 1002:
 				 	 err:=resultObj.Data.(error)
@@ -58,8 +58,8 @@ func ResultMiddleware()  gin.HandlerFunc{
                return
 		    }
 		    c.JSON(200,gin.H{
-		    		 "code":500,
-		    		 "msg":"系统错误!",
+		    		 "code":404,
+		    		 "msg":"没有找到!",
 			})
 	 }
 }

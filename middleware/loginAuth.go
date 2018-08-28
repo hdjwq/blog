@@ -3,9 +3,12 @@ package middleware
 import (
 	"github.com/gin-gonic/gin"
 	"com.blog/dal/redis"
+	"fmt"
 )
 var loginMap=map[string] bool{
 	"/api/user/updateInfo":true,
+	"/api/article/add":true,
+	"/api/article/delete":true,
 }
 
 func toLogin(c *gin.Context)  {
@@ -29,6 +32,8 @@ func LoginAuth()  gin.HandlerFunc{
 				   toLogin(c)
 				   return
 			   }
+			   userId:=fmt.Sprintf("%s",result)
+			   c.Set("userId",userId);
 		  }
 		  c.Next();
 	}
